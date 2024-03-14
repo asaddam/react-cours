@@ -1,4 +1,5 @@
 import { calcMinutesLeft, formatDate, formatCurrency } from "../../utils/helpers";
+import { getOrder } from "../../services/apiRestaurant";
 
 const order = {
   id: "ABCDEF",
@@ -76,4 +77,9 @@ export default function Order() {
     </div>
 
   </div>;
+}
+
+export async function loader({params}) {
+  const order = await getOrder(params.orderId);
+  return order;
 }
