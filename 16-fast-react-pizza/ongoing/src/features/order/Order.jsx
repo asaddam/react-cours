@@ -7,7 +7,6 @@ import { getOrder } from '../../services/apiRestaurant';
 import { useLoaderData } from 'react-router-dom';
 import OrderItem from './OrderItem';
 
-
 export default function Order() {
   const order = useLoaderData();
   const {
@@ -24,18 +23,17 @@ export default function Order() {
   return (
     <div className="space-y-8 px-4 py-6">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <h2 className="text-xl font-semibold">Status</h2>
-      </div>
-
-      <div className="space-x-2">
-        {priority && (
-          <span className="rounded-full bg-red-500 px-3 py-1 text-sm font-semibold uppercase tracking-wide text-red-50">
-            Priority
+        <h2 className="text-xl font-semibold">Order id #{id} Status</h2>
+        <div className="space-x-2">
+          {priority && (
+            <span className="rounded-full bg-red-500 px-3 py-1 text-sm font-semibold uppercase tracking-wide text-red-50">
+              Priority
+            </span>
+          )}
+          <span className="rounded-full bg-green-500 px-3 py-1 text-sm font-semibold uppercase tracking-wide text-green-50">
+            {status} order
           </span>
-        )}
-        <span className="rounded-full bg-green-500 px-3 py-1 text-sm font-semibold uppercase tracking-wide text-green-50">
-          {status} order
-        </span>
+        </div>
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-2 bg-stone-400 px-6 py-5">
@@ -49,9 +47,9 @@ export default function Order() {
         </p>
       </div>
 
-      <ul className="divide-y dive-stone-200 border-b border-t">
+      <ul className="dive-stone-200 divide-y border-b border-t">
         {cart.map((item) => (
-          <OrderItem item={item} key={item.id} />
+          <OrderItem item={item} key={item.pizzaId} />
         ))}
       </ul>
 
