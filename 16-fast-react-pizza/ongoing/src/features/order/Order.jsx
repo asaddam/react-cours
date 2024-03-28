@@ -4,10 +4,12 @@ import {
   formatCurrency,
 } from '../../utils/helpers';
 import { getOrder } from '../../services/apiRestaurant';
-import { useLoaderData } from 'react-router-dom';
+import { useFetcher, useLoaderData } from 'react-router-dom';
 import OrderItem from './OrderItem';
+import { useEffect } from 'react';
 
 export default function Order() {
+  const fetcher = useFetcher();
   const order = useLoaderData();
   const {
     id,
@@ -19,6 +21,14 @@ export default function Order() {
     cart,
   } = order;
   const deliveryIn = calcMinutesLeft(estimatedDelivery);
+
+  useEffect(
+    function () {
+      if (!fetcher.data && fetcher.state === 'idle') fetcher.load('/menu');
+    },
+    [fetcher],
+  );
+  console.log(fetcher.data);
 
   return (
     <div className="space-y-8 px-4 py-6">
@@ -49,7 +59,12 @@ export default function Order() {
 
       <ul className="dive-stone-200 divide-y border-b border-t">
         {cart.map((item) => (
-          <OrderItem item={item} key={item.pizzaId} />
+          <OrderItem
+            item={item}
+            key={item.pizzaId}
+            ingredients={fetcher.data?.find((el) => el.id === item.pizzaId).ingredients}
+            isLoadingIngredients={fetcher.state === 'loading'}
+          />
         ))}
       </ul>
 
