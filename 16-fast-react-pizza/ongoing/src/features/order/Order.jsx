@@ -7,6 +7,7 @@ import { getOrder } from '../../services/apiRestaurant';
 import { useFetcher, useLoaderData } from 'react-router-dom';
 import OrderItem from './OrderItem';
 import { useEffect } from 'react';
+import UpdateOrder from './UpdateOrder';
 
 export default function Order() {
   const fetcher = useFetcher();
@@ -28,7 +29,7 @@ export default function Order() {
     },
     [fetcher],
   );
-  console.log(fetcher.data);
+  console.log(fetcher.data)
 
   return (
     <div className="space-y-8 px-4 py-6">
@@ -62,10 +63,13 @@ export default function Order() {
           <OrderItem
             item={item}
             key={item.pizzaId}
-            ingredients={fetcher.data?.find((el) => el.id === item.pizzaId).ingredients}
+            ingredients={fetcher?.data?.find((el) => el.id === item.pizzaId)?.ingredients ?? []}
             isLoadingIngredients={fetcher.state === 'loading'}
           />
-        ))}
+        ))
+
+        }
+        
       </ul>
 
       <div className="space-y-2 bg-stone-400 px-6 py-5">
@@ -81,6 +85,8 @@ export default function Order() {
           To pay on delivery: {formatCurrency(orderPrice + priorityPrice)}
         </p>
       </div>
+      
+      {!priority && <UpdateOrder order={order} />}
     </div>
   );
 }
