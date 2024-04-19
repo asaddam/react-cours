@@ -26,15 +26,16 @@ const Container = styled.div`
 
 function AppLayout() {
   return (
-    // <StyledAppLayout>
-    //   <Header />
-    //   <Sidebar />
-    //   <Main>
-    //     <Container>
-    //       <Outlet />
-    //     </Container>
-    //   </Main>
-    // </StyledAppLayout>
+
+    <StyledAppLayout>
+      <Header />
+      <Sidebar />
+      <Main>
+        <Container>
+          <Outlet />
+        </Container>
+      </Main>
+    </StyledAppLayout>
   );
 }
 
