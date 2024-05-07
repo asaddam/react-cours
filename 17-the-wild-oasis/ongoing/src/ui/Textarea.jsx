@@ -6,8 +6,8 @@ const Textarea = styled.textarea`
   border-radius: 5px;
   background-color: var(--color-grey-0);
   box-shadow: var(--shadow-sm);
-  width: 100%;
-  height: 8rem;
+  width: 24rem;
+  /* height: 8rem; */
 `;
 
 export default Textarea;
