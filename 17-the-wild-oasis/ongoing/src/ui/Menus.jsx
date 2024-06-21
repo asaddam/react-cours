@@ -87,6 +87,7 @@ function Toggle({ id }) {
   const { openId, close, open, setPosition } = useContext(MenusContext);
 
   function handleClick(e) {
+    //  prevents propagation of the sameevent from being called.
     e.stopPropagation();
 
     const rect = e.target.closest("button").getBoundingClientRect();
